@@ -272,10 +272,8 @@ func processLoop(c *Conn, writer *frame.Writer) {
 
 		select {
 		case <-readTimeoutChannel:
-			// read timeout, close the connection
-			err := newErrorMessage("read timeout")
-			sendError(channels, err)
-			return
+			// Read timeout
+			continue
 
 		case <-writeTimeoutChannel:
 			// write timeout, send a heart-beat frame
